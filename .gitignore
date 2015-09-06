@@ -2,7 +2,6 @@
 bundle
 autoload
 bitmaps
-syntax
 colors
 
 .netrwhist
