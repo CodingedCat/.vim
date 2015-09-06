@@ -52,16 +52,22 @@ Plugin 'pep8'                           ""
 Plugin 'ervandew/supertab'              ""
 Plugin 'tpope/vim-git'                  "git"
 Plugin 'tpope/vim-fugitive'             "git"
-"Plugin 'FuzzyFinder'                    "find and open files"
-"Plugin 'wincent/command-t'              ""
-"Plugin 'sontek/rope-vim'                "code review"
+"Plugin 'FuzzyFinder'                   "find and open files
+"Plugin 'wincent/command-t'             "
+"Plugin 'sontek/rope-vim'               "code review
 Plugin 'kien/ctrlp.vim'					"file name search"
-Plugin 'mileszs/ack.vim'                "code search"
+"Plugin 'mileszs/ack.vim'               "code search
+"Plugin 'ag.vim'                        "code search
 Plugin 'dyng/ctrlsf.vim'				"search"
 "Plugin 'Lokaltog/vim-powerline'
 "Plugin 'statusline.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-commentary'
+Plugin 'hsitz/VimOrganizer'
+Plugin 'Conque-Shell'
+Plugin 'itchyny/calendar.vim'
+Plugin 'chrisbra/NrrwRgn'
+Plugin 'utl.vim'
 
 
 "Plugin 'bufexplorer.zip'
@@ -95,7 +101,7 @@ let g:miniBufExplMapWindowNavArrows=1
 "taglist
 set tags=tags
 set autochdir
-"let Tlist_Ctags_Cmd='~/ctags'
+let Tlist_Ctags_Cmd='~/Work/tools/ctags5.8/bin/ctags'
 "let Tlist_Show_One_File=1
 "let Tlist_Exit_OnlyWindow=1
 
@@ -173,6 +179,15 @@ let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
+"org-mode"
+let g:org_command_for_emacsclient ='emacsclient'
+au! BufRead,BufWrite,BufWritePost,BufNewFile *.org 
+au BufEnter *.org call org#SetOrgFileType()
+
+"calendar"
+let g:calendar_google_calendar = 1
+let g:calendar_google_task = 1
+
 
 "set go=Tm
 "set go=m
@@ -231,7 +246,7 @@ set statusline=%F%m%r%h%w\ [%Y,%{&ff},%{(&fenc==\"\"?&enc:&fenc).(&bomb?\",BOM\"
 
 function InsertStatuslineColor(mode)
     if a:mode == 'i'
-        hi statusline guibg=green
+        hi statusline guibg=red
     elseif a:mode == 'r'
         hi statusline guibg=blue
     else
@@ -241,7 +256,7 @@ endfunction
 
 au InsertEnter * call InsertStatuslineColor(v:insertmode)
 au InsertChange * call InsertStatuslineColor(v:insertmode)
-au InsertLeave * hi statusline guibg=white guifg=black
+au InsertLeave * hi statusline guibg=#002B36
 "hi statusline guibg=black
 
 
