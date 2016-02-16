@@ -29,7 +29,24 @@ syn keyword sqlKeyword	option pctfree privileges procedure
 syn keyword sqlKeyword	public resource return row rowlabel rownum rows
 syn keyword sqlKeyword	session share size smallint type using
 
-syn keyword sqlKeyword  case when global temporary ! = < >
+syn keyword plsqlKeyword AGENT AND ANY ARRAY ASSIGN AS AT AUTHID BEGIN BODY BY
+syn keyword plsqlKeyword BULK C CASE CHAR_BASE CHARSETFORM CHARSETID CLOSE
+syn keyword plsqlKeyword COLLECT CONSTANT CONSTRUCTOR CONTEXT CURRVAL DECLARE
+syn keyword plsqlKeyword DVOID EXCEPTION EXCEPTION_INIT EXECUTE EXIT FETCH
+syn keyword plsqlKeyword FINAL FUNCTION GOTO HASH IMMEDIATE IN INDICATOR
+syn keyword plsqlKeyword INSTANTIABLE IS JAVA LANGUAGE LIBRARY MAP MAXLEN
+syn keyword plsqlKeyword MEMBER NAME NEW NOCOPY NUMBER_BASE OBJECT OCICOLL
+syn keyword plsqlKeyword OCIDATE OCIDATETIME OCILOBLOCATOR OCINUMBER OCIRAW
+syn keyword plsqlKeyword OCISTRING OF OPAQUE OPEN OR ORDER OTHERS OUT
+syn keyword plsqlKeyword OVERRIDING PACKAGE PARALLEL_ENABLE PARAMETERS
+syn keyword plsqlKeyword PARTITION PIPELINED PRAGMA PROCEDURE RAISE RANGE REF
+syn keyword plsqlKeyword RESULT RETURN REVERSE ROWTYPE SB1 SELF SHORT SIZE_T
+syn keyword plsqlKeyword SQL SQLCODE SQLERRM STATIC STRUCT SUBTYPE TDO THEN
+syn keyword plsqlKeyword TABLE TIMEZONE_ABBR TIMEZONE_HOUR TIMEZONE_MINUTE
+syn keyword plsqlKeyword TIMEZONE_REGION TYPE UNDER UNSIGNED USING VARIANCE
+syn keyword plsqlKeyword VARRAY VARYING WHEN WRITE
+
+syn keyword sqlKeyword  case when global temporary 
 
 syn keyword sqlStatement from group by as having declare with where order
 
@@ -39,6 +56,8 @@ syn keyword sqlOperator	like escape
 syn keyword sqlOperator union intersect minus
 syn keyword sqlOperator prior distinct
 syn keyword sqlOperator	sysdate out
+syn match   sqlOperator "\(+\|-\|\*\|/\|=\|<\|>\|@\|\*\*\|!=\|\~=\)"
+syn match   sqlOperator "\(^=\|<=\|>=\|:=\|=>\|\.\.\|||\|<<\|>>\|\"\)"
 
 syn keyword sqlStatement alter analyze audit comment commit create 
 syn keyword sqlStatement delete drop execute explain grant insert lock noaudit
@@ -81,6 +100,7 @@ syn keyword plsqlFunction TO_TIME TO_TIMESTAMP TO_TIMESTAMP_TZ TO_TIME_TZ
 syn keyword plsqlFunction TO_YMINTERVAL TRANSLATE TREAT TRIM TRUNC TZ_OFFSET UID
 syn keyword plsqlFunction UNISTR UPPER UROWID USER USERENV VALUE VARIANCE
 syn keyword plsqlFunction VSIZE WORK XOR
+syn keyword plsqlFunction ROW_NUMBER OVER
 syn match   plsqlFunction "\<SYS\$LOB_REPLICATION\>"
 
 

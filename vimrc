@@ -24,8 +24,7 @@ else
 endif
 
 set nocompatible
-filetype plugin indent on
-"filetype off
+filetype off
 
 "Vundle location
 set rtp+=~/.vim/bundle/Vundle.vim/
@@ -36,7 +35,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'L9'
 Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
-"Plugin 'fholgado/minibufexpl.vim'
+Plugin 'fholgado/minibufexpl.vim'
 "Plugin 'Valloric/ListToggle'
 Plugin 'mileszs/ack.vim'                "code searchx
 Plugin 'ag.vim'                         "ag searche
@@ -47,15 +46,16 @@ Plugin 'kien/ctrlp.vim'                 "file name search
 Plugin 'msanders/snipmate.vim'          "code complete
 Plugin 'sjl/gundo.vim'                  "file history
 Plugin 'scrooloose/syntastic'           "syntax check
+if has("gui_running")
 Plugin 'Valloric/YouCompleteMe'         "auto complete
+endif
 Plugin 'tpope/vim-commentary'           "comment
 Plugin 'terryma/vim-multiple-cursors'   
-Plugin 'rizzatti/dash.vim'
-Plugin 'ervandew/eclim'                 "java ide
-"Plugin 'davidhalter/jedi-vim'           "python ide
+"Plugin 'ervandew/eclim'                 "java ide
+Plugin 'davidhalter/jedi-vim'           "python ide
 Plugin 'fs111/pydoc.vim'                "python doc
 Plugin 'pep8'                           "python style check
-"Plugin 'c.vim'
+Plugin 'c.vim'
 Plugin 'tpope/vim-surround'             "replace quoting"
 Plugin 'chrisbra/csv.vim'
 Plugin 'easymotion/vim-easymotion'
@@ -168,7 +168,6 @@ inoremap <leader>et <Esc>:CtrlSFToggle<CR>
 
 "eclim"
 "let g:EclimCompletionMethod = 'omnifunc'
-"let g:EclimJavaCompleteCaseSensitive=1
 
 "pep8"
 let g:pep8_map='<leader>8'
@@ -306,3 +305,28 @@ else
     echoerr "Sorry, this version of (g)vim was not compiled with multi_byte"
 endif
 
+
+set diffexpr=MyDiff()
+function MyDiff()
+    let opt = '-a --binary '
+    if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+    if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+    let arg1 = v:fname_in
+    if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+    let arg2 = v:fname_new
+    if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+    let arg3 = v:fname_out
+    if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+    let eq = ''
+    if $VIMRUNTIME =~ ' '
+        if &sh =~ '\<cmd'
+            let cmd = '""' . $VIMRUNTIME . '\diff"'
+            let eq = '"'
+        else
+            let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+        endif
+    else
+        let cmd = $VIMRUNTIME . '\diff'
+    endif
+    silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+endfunction
